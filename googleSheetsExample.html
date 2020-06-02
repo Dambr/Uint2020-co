@@ -1,0 +1,35 @@
+
+<script type="text/javascript">
+(function () {
+   var app = "https://script.google.com/macros/s/AKfycbxDDv9SfJS59Z0wtut7hdtceIZS05697-DM5e7YGrZFu7PWjP8/exec",
+      output = '',
+      xhr = new XMLHttpRequest();
+   xhr.open('GET', app);
+   xhr.onreadystatechange = function() {
+     if (xhr.readyState !== 4) return;
+
+     if (xhr.status == 200) {
+        try {
+            var r = JSON.parse(xhr.responseText),
+               result = r["result"];
+            for (var i = 0; i < result.length; i++){
+                  var obj = r["result"][i];
+                  output += obj.join("<br/>") + "<br/><hr/>";
+            }
+        } catch(e) {}
+     } 
+     
+   document.getElementById('info').innerHTML = output;
+
+   }
+   xhr.send()
+})()
+
+
+</script>
+
+<html><body>
+
+<div id="info"></div>
+
+</body></html>
